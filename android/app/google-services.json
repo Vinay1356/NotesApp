@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "552204956368",
+    "project_id": "dummy-684f7",
+    "storage_bucket": "dummy-684f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552204956368:android:a3fede28c482171bc0a4d5",
+        "android_client_info": {
+          "package_name": "com.example.firebase_connections_tutorials"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552204956368-a27se3oism7mo8lcqe6g31upg6i0fnt4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeL6PTZ05tmAYSx3FID2GJJ7w7Vub_j70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552204956368-a27se3oism7mo8lcqe6g31upg6i0fnt4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
