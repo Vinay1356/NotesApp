@@ -17,7 +17,7 @@ class _PostScreenState extends State<PostScreen> {
   final auth = FirebaseAuth.instance;
   final ref = FirebaseDatabase.instance.ref('Post');
   final searchFilter = TextEditingController();
-
+  final editController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _PostScreenState extends State<PostScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: TextFormField(
                 controller: searchFilter,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Search',
                   border: OutlineInputBorder(),
                 ),
@@ -60,15 +60,34 @@ class _PostScreenState extends State<PostScreen> {
             Expanded(
               child: FirebaseAnimatedList(
                   query: ref,
-                  defaultChild: Text('Loading'),
+                  defaultChild: const Text('Loading'),
                   itemBuilder: (context, snapshot, animation, index) {
                     final title = snapshot.child('title').value.toString();
 
                     if (searchFilter.text.isEmpty) {
                       return ListTile(
                         title: Text(snapshot.child('title').value.toString()),
-                        subtitle: Text(
-                          snapshot.child('id').value.toString(),
+                        subtitle: Text(snapshot.child('id').value.toString()),
+                        trailing: PopupMenuButton(
+                          icon: const Icon(Icons.more_vert),
+                          itemBuilder: (context) => [
+                            PopupMenuItem(
+                                value: 1,
+                                child: ListTile(
+                                  onTap: (){
+                                    Navigator.pop(context);
+                                    showMyDialog(title,snapshot.child('id').value.toString());
+                                  },
+                                  leading: const Icon(Icons.edit),
+                                  title: const Text('Edit'),
+                                )),
+                            const PopupMenuItem(
+                                value: 1,
+                                child: ListTile(
+                                  leading: Icon(Icons.delete),
+                                  title: Text('Delete'),
+                                )),
+                          ],
                         ),
                       );
                     } else if (title
@@ -92,11 +111,45 @@ class _PostScreenState extends State<PostScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddPostScreen(),
+                  builder: (context) => const AddPostScreen(),
                 ));
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ));
+  }
+  Future<void> showMyDialog(String title,String id) async{
+    editController.text = title;
+    return showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: const Text('Update'),
+          content: TextField(
+            controller: editController,
+            decoration: const InputDecoration(
+              hintText: 'Edit'
+            ),
+          ),
+          actions: [
+            TextButton(onPressed: (){
+              Navigator.pop(context);
+            }, child: const Text('Cancel')),
+            TextButton(onPressed: (){
+              Navigator.pop(context);
+              ref.child(id).update({
+                'title': editController.text.toString()
+              }).then((value) {
+                Utils().toastMessage('Post Updated');
+
+              }).onError((error, stackTrace) {
+                Utils().toastMessage(error.toString());
+              });
+            }, child: const Text('Update'))
+          ],
+        );
+      }
+    );
+
   }
 }
 

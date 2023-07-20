@@ -18,25 +18,25 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Post'),
+        title: const Text('Add Post'),
 
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             TextFormField(
               maxLines: 4,
               controller: postController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'what is in your mind',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             RoundButton(
@@ -46,9 +46,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   setState(() {
                     loading = true;
                   });
-                  databaseRef.child(DateTime.now().millisecondsSinceEpoch.toString()).set({
+
+                  String id = DateTime.now().millisecondsSinceEpoch.toString();
+                  databaseRef.child(id).set({
                     'title': postController.text.toString(),
-                    'id': DateTime.now().millisecondsSinceEpoch.toString(),
+                    'id': id,
                   }).then((value) {
                     setState(() {
                       loading = false;
