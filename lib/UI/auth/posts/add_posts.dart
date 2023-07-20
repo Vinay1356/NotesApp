@@ -1,3 +1,4 @@
+import 'package:firebase_connections_tutorials/UI/auth/posts/post_screen.dart';
 import 'package:firebase_connections_tutorials/Utils/Utils.dart';
 import 'package:firebase_connections_tutorials/widgets/round_button.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -43,6 +44,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 title: 'Add',
                 loading: loading,
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const PostScreen()));
                   setState(() {
                     loading = true;
                   });
