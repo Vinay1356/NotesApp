@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('FireBase Tutorials',style: TextStyle(fontSize: 30),),
+        child: Text('FireBase Auth + Database',style: TextStyle(fontSize: 30),),
       ),
     );
   }
