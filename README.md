@@ -1,4 +1,4 @@
-# firebase_connections_database based application : QuikPlan
+# firebase_connections_database based application : QuikToDo
 
 A new Flutter project.
 
