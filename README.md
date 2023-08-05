@@ -1,4 +1,4 @@
-# firebase_connections_tutorials
+# firebase_connections_database based application : QuikPlan
 
 A new Flutter project.
 
