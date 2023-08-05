@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_connections_tutorials/UI/auth/varify_code.dart';
+import 'package:firebase_connections_tutorials/UI/auth/verify_code.dart';
 import 'package:firebase_connections_tutorials/Utils/Utils.dart';
 import 'package:firebase_connections_tutorials/widgets/round_button.dart';
 import 'package:flutter/material.dart';
+import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 
 
 class LoginWithPhoneNumber extends StatefulWidget {
@@ -18,6 +19,8 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
   final auth = FirebaseAuth.instance;
   final phoneNumberController = TextEditingController();
 
+  final countryPicker = const FlCountryCodePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,13 +31,14 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
           children: [
             const SizedBox(height: 80),
             TextFormField(
+              maxLines: 1,
               controller: phoneNumberController,
-              decoration: const InputDecoration(
-                hintText: '+91 234567890'
+              decoration: InputDecoration(
+                hintText: "+91 9890182987"
               ),
             ),
             const SizedBox(height: 80),
-            RoundButton(title: 'Login',loading: loading, onTap: (){
+            RoundButton(title: 'Send verification code ',loading: loading, onTap: (){
               setState(() {
                 loading = true;
               });
