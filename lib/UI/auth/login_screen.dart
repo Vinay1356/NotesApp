@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return true;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset : false,
         appBar: AppBar(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           automaticallyImplyLeading: false,
-          title: const Center(child: Text('Login')),
+          title: const Center(child: Text('Login',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,letterSpacing: 5),)),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -78,26 +79,44 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: AssetImage('assets/vecteezy_3d-password-input-illustration-design_10998284_874.png'),
+                      radius: 120,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 40,),
               Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Form(
                       key: _formKey,
                       child: Column(
                         children: [
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            controller: emailController,
-                            decoration: const InputDecoration(
-                              filled: true,
-                              prefixIcon: Icon(Icons.email_outlined),
-                              hintText: 'Email',
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              controller: emailController,
+                              decoration: const InputDecoration(
+                                filled: true,
+                                prefixIcon: Icon(Icons.email_outlined),
+
+                                hintText: 'Email',
+                                hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15)
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Enter your email';
+                                }
+                                return null;
+                              },
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Enter your email';
-                              }
-                              return null;
-                            },
                           ),
                           const SizedBox(height: 20),
                           TextFormField(
@@ -106,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             obscureText: true,
                             decoration: const InputDecoration(
                               filled: true,
-                              hintText: 'Password',
+                              hintText: 'Password', hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15),
                               prefixIcon: Icon(Icons.lock_outline_rounded),
                             ),
                             validator: (value) {
@@ -155,15 +174,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginWithPhoneNumber()));
                 },
                 child: Container(
+                  width: 500,
                   height: 50,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: Colors.black
+                      color: Colors.red,
+
                     )
                   ),
                   child: const Center(
-                    child: Text('Login with Phone Number..'),
+                    child: Text('Login with Phone Number..', style: TextStyle(fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15),),
                   ),
                 ),
               )

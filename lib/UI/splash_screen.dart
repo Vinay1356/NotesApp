@@ -21,8 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: Colors.black26,
       body: Center(
-        child: Text('FireBase Auth + Database',style: TextStyle(fontSize: 30),),
+        child: Text('Welcome to QuickToDo ',style: TextStyle(fontSize: 30,color: Colors.white ,fontWeight: FontWeight.bold),),
       ),
     );
   }

@@ -19,7 +19,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Post'),
+        title: const Text('Add Post',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,letterSpacing: 5),),
 
       ),
       body: Padding(

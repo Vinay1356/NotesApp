@@ -40,7 +40,7 @@ class _PostScreenState extends State<PostScreen> {
               icon: const Icon(Icons.logout),
             ),
           ],
-          title: const Center(child: Text('Post')),
+          title: const Center(child: Text('Post',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,letterSpacing: 5),)),
         ),
         body: Column(
           children: [
@@ -49,6 +49,7 @@ class _PostScreenState extends State<PostScreen> {
               child: TextFormField(
                 controller: searchFilter,
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.filter_alt),
                   hintText: 'Search',
                   border: OutlineInputBorder(),
                 ),

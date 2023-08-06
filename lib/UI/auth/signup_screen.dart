@@ -3,6 +3,7 @@ import 'package:firebase_connections_tutorials/UI/auth/login_screen.dart';
 import 'package:firebase_connections_tutorials/Utils/Utils.dart';
 import 'package:firebase_connections_tutorials/widgets/round_button.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -49,11 +50,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
+  void _onSignUpButtonPressed(BuildContext context) {
+    // Simulating a successful sign-up
+    bool isSignUpSuccessful = true;
+    if (isSignUpSuccessful) {
+      // Navigate to the HomeScreen after successful sign-up
+      Fluttertoast.showToast(
+        msg: "Sign-up successful!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       appBar: AppBar(
-        title: const Center(child: Text('Sign up')),
+        title: const Center(child: Text('Sign up',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,letterSpacing: 5),)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -61,6 +83,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                backgroundImage: AssetImage('assets/vecteezy_3d-face-lock-illustration_12421891_249.png'),
+                radius: 120,
+              ),
+            ),
+            const SizedBox(height: 20,),
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Form(
@@ -72,6 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           controller: emailController,
                           decoration: const InputDecoration(
                             hintText: 'Email',
+                              hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15),
                             prefixIcon: Icon(Icons.email_outlined),
                           ),
                           validator: (value) {
@@ -87,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           controller: passwordController,
                           obscureText: true,
                           decoration: const InputDecoration(
-                            hintText: 'Password',
+                            hintText: 'Password',hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15),
                             prefixIcon: Icon(Icons.lock_outline_rounded),
                           ),
                           validator: (value) {
@@ -106,6 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               title: 'Sign up',
               loading: loading,
               onTap: () {
+                _onSignUpButtonPressed(context);
                 if (_formKey.currentState!.validate()) {
                   signUp();
                 }
