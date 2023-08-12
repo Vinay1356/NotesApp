@@ -42,7 +42,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             const SizedBox(
               height: 30,
             ),
-            /*Old round button */
+            /*Old round button ↓ */
             // RoundButton(
             //     title: 'Add',
             //     loading: loading,
@@ -93,7 +93,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PostScreen(), // Replace with the desired screen
+                      builder: (context) => const PostScreen(), // Replace with the desired screen
                     ),
                   );
                 }).onError((error, stackTrace) {
