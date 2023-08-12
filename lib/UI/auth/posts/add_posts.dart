@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_connections_tutorials/UI/auth/posts/post_screen.dart';
+// import 'package:firebase_connections_tutorials/UI/auth/posts/post_screen.dart';
 import 'package:firebase_connections_tutorials/Utils/Utils.dart';
 import 'package:firebase_connections_tutorials/widgets/round_button.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -40,31 +42,68 @@ class _AddPostScreenState extends State<AddPostScreen> {
             const SizedBox(
               height: 30,
             ),
+            /*Old round button */
+            // RoundButton(
+            //     title: 'Add',
+            //     loading: loading,
+            //     onTap: () {
+            //       Navigator.push(context, MaterialPageRoute(builder: (context) => const PostScreen()));
+            //       setState(() {
+            //         loading = true;
+            //       });
+            //
+            //       String id = DateTime.now().millisecondsSinceEpoch.toString();
+            //       databaseRef.child(id).set({
+            //         'title': postController.text.toString(),
+            //         'id': id,
+            //       }).then((value) {
+            //         setState(() {
+            //           loading = false;
+            //         });
+            //         Utils().toastMessage('Post added');
+            //       }).onError((error, stackTrace) {
+            //         setState(() {
+            //           loading = false;
+            //         });
+            //         Utils().toastMessage(error.toString());
+            //       });
+            //     })
+            // AddPostScreen
             RoundButton(
-                title: 'Add',
-                loading: loading,
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const PostScreen()));
-                  setState(() {
-                    loading = true;
-                  });
+              title: 'Add',
+              loading: loading,
+              onTap: () {
+                setState(() {
+                  loading = true;
+                });
 
-                  String id = DateTime.now().millisecondsSinceEpoch.toString();
-                  databaseRef.child(id).set({
-                    'title': postController.text.toString(),
-                    'id': id,
-                  }).then((value) {
-                    setState(() {
-                      loading = false;
-                    });
-                    Utils().toastMessage('Post added');
-                  }).onError((error, stackTrace) {
-                    setState(() {
-                      loading = false;
-                    });
-                    Utils().toastMessage(error.toString());
+                String id = DateTime.now().millisecondsSinceEpoch.toString();
+                String userId = FirebaseAuth.instance.currentUser!.uid; // Get current user's UID
+
+                databaseRef.child(userId).child(id).set({
+                  'title': postController.text.toString(),
+                  'id': id,
+                }).then((value) {
+                  setState(() {
+                    loading = false;
                   });
-                })
+                  Utils().toastMessage('Post added');
+
+                  // Navigate to another screen after successful post addition
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PostScreen(), // Replace with the desired screen
+                    ),
+                  );
+                }).onError((error, stackTrace) {
+                  setState(() {
+                    loading = false;
+                  });
+                  Utils().toastMessage(error.toString());
+                });
+              },
+            )
           ],
         ),
       ),

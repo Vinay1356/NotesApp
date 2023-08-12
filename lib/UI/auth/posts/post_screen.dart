@@ -60,7 +60,7 @@ class _PostScreenState extends State<PostScreen> {
             ),
             Expanded(
               child: FirebaseAnimatedList(
-                  query: ref,
+                  query: ref.child(FirebaseAuth.instance.currentUser!.uid),
                   defaultChild: const Text('Loading'),
                   itemBuilder: (context, snapshot, animation, index) {
                     final title = snapshot.child('title').value.toString();
