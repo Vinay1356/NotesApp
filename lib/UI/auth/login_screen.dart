@@ -36,8 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     _auth
         .signInWithEmailAndPassword(
-            email: emailController.text.toString(),
-            password: passwordController.text.toString())
+        email: emailController.text.toString(),
+        password: passwordController.text.toString())
         .then((value) {
       Utils().toastMessage(value.user!.email.toString());
       Navigator.push(
@@ -104,11 +104,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               keyboardType: TextInputType.emailAddress,
                               controller: emailController,
                               decoration: const InputDecoration(
-                                filled: true,
-                                prefixIcon: Icon(Icons.email_outlined),
+                                  filled: true,
+                                  prefixIcon: Icon(Icons.email_outlined),
 
-                                hintText: 'Email',
-                                hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15)
+                                  hintText: 'Email',
+                                  hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15)
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -177,11 +177,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 500,
                   height: 50,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.red,
 
-                    )
+                      )
                   ),
                   child: const Center(
                     child: Text('Login with Phone Number..', style: TextStyle(fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15),),

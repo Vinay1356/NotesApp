@@ -60,7 +60,7 @@ class _PostScreenState extends State<PostScreen> {
             ),
             Expanded(
               child: FirebaseAnimatedList(
-                  query: ref.child(FirebaseAuth.instance.currentUser!.uid),
+                  query: ref,
                   defaultChild: const Text('Loading'),
                   itemBuilder: (context, snapshot, animation, index) {
                     final title = snapshot.child('title').value.toString();
@@ -125,34 +125,34 @@ class _PostScreenState extends State<PostScreen> {
   Future<void> showMyDialog(String title,String id) async{
     editController.text = title;
     return showDialog(
-      context: context,
-      builder: (BuildContext context){
-        return AlertDialog(
-          title: const Text('Update'),
-          content: TextField(
-            controller: editController,
-            decoration: const InputDecoration(
-              hintText: 'Edit'
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: const Text('Update'),
+            content: TextField(
+              controller: editController,
+              decoration: const InputDecoration(
+                  hintText: 'Edit'
+              ),
             ),
-          ),
-          actions: [
-            TextButton(onPressed: (){
-              Navigator.pop(context);
-            }, child: const Text('Cancel')),
-            TextButton(onPressed: (){
-              Navigator.pop(context);
-              ref.child(id).update({
-                'title': editController.text.toString()
-              }).then((value) {
-                Utils().toastMessage('Post Updated');
+            actions: [
+              TextButton(onPressed: (){
+                Navigator.pop(context);
+              }, child: const Text('Cancel')),
+              TextButton(onPressed: (){
+                Navigator.pop(context);
+                ref.child(id).update({
+                  'title': editController.text.toString()
+                }).then((value) {
+                  Utils().toastMessage('Post Updated');
 
-              }).onError((error, stackTrace) {
-                Utils().toastMessage(error.toString());
-              });
-            }, child: const Text('Update'))
-          ],
-        );
-      }
+                }).onError((error, stackTrace) {
+                  Utils().toastMessage(error.toString());
+                });
+              }, child: const Text('Update'))
+            ],
+          );
+        }
     );
 
   }

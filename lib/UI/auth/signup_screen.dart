@@ -34,8 +34,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
     _auth
         .createUserWithEmailAndPassword(
-            email: emailController.text.toString(),
-            password: passwordController.text.toString())
+        email: emailController.text.toString(),
+        password: passwordController.text.toString())
         .then((value) {
       setState(() {
         loading = false;
@@ -103,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           controller: emailController,
                           decoration: const InputDecoration(
                             hintText: 'Email',
-                              hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15),
+                            hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,letterSpacing: 3,fontSize: 15),
                             prefixIcon: Icon(Icons.email_outlined),
                           ),
                           validator: (value) {
